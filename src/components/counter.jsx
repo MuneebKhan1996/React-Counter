@@ -30,23 +30,41 @@ class Counter extends Component {
     render() { 
         console.log("counter here")
         return (
-            <div>
-                {this.props.children}
-                <span style={this.styles} className={this.getBadgeClasses()} >{this.formatCount()}</span>
-                <button 
-                    onClick={() => this.props.onIncrement(this.props.counter)} 
-                    className="btn btn-secondary ml-5">Increment
-                </button>
-                <button
-                    onClick={() => this.props.onDelete(this.props.counter.id)} 
-                    className="btn btn-danger ml-5">Delete
-                </button>
+            <div className="counter_wrapper m-2">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm-1 w-100">
+                            {this.props.children}
+                            <span style={this.styles} className={this.getBadgeClasses()} >{this.formatCount()}</span>
+                        </div>
+                        <div className="col-sm-5">
+                            <button 
+                                onClick={() => this.props.onIncrement(this.props.counter)} 
+                                className="btn btn-secondary mx-2">+
+                            </button>
+                        {/* </div>
+                        <div className="col-sm-1"> */}
+                            <button 
+                                onClick={() => this.props.onDecrement(this.props.counter)} 
+                                className="btn btn-secondary mx-2"
+                                disabled={this.props.counter.value === 0 ? 'Disabled' : ''}
+                                >-
+                            </button>
+                        {/* </div>
+                        <div className="col-sm-1"> */}
+                            <button
+                                onClick={() => this.props.onDelete(this.props.counter.id)} 
+                                className="btn btn-danger mx-2">X
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
 
     getBadgeClasses() {
-        let classes = "m-2 w-25 badge badge-";
+        let classes = "w-100 h-100 badge badge-";
         classes += this.props.counter.value === 0 ? 'warning' : 'primary';
         return classes;
     }
